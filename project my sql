@@ -1,0 +1,118 @@
+cod
+create database store ;
+use store ;
+create table countries (
+code int  primary key ,
+name varchar (20) ,
+continent_name varchar (20)
+);
+use store ;
+create table users (
+id int primary key ,
+full_name varchar (20) ,
+email varchar  (20) ,
+gender char (1) ,
+date_of_birth varchar (15) ,
+created_at datetime ,
+country_code int ,
+) ;
+USE store;
+CREATE TABLE orders (
+Id INT PRIMARY KEY ,
+user_id INT ,
+status VARCHAR(6) ,
+created_at DATETIME ,
+);
+USE store;
+CREATE TABLE order_products (
+order_id INT PRIMARY KEY ,
+product_id INT,
+quantity INT,
+);
+USE store;
+CREATE TABLE products (
+Id INT PRIMARY KEY,
+name VARCHAR(10),
+price INT,
+status VARCHAR (10) ,
+created_at DATETIME ,
+);
+
+
+USE store ;
+ALTER TABLE users
+ADD foreign key (gender)references countries (cod)
+
+USE store ;
+ALTER TABLE users
+ADD foreign key country_code references orders (id)
+
+USE store ;
+ALTER TABLE  order_products
+ADD foreign key order_id references orders (id)
+ADD foreign key  product_id references products (id)
+
+USE store;
+ALTER TABLE countries;
+ADD UNIQUE (name);
+
+USE store;
+ALTER TABLE countries;
+MODIFY constraint_name VARCHAR NOT NULL;
+
+USE store;
+ALTER TABLE users;
+ADD UNIQUE (email);
+
+USE store;
+ALTER TABLE users;
+CHECK (gender BETWEEN 'm' or 'f');
+
+USE store;
+ALTER TABLE orders;
+CHECK (status BETWEEN 'start' or 'finish');
+
+USE store;
+ALTER TABLE order_items ;
+MODIFY quantity DEFAULT 0 ;
+
+USE store;
+ALTER TABLE products ;
+MODIFY price DEFAULT 0 ;
+
+USE store;
+ALTER TABLE products;
+MODIFY name VARCHAR NOT NULL;
+
+USE store;
+ALTER TABLE products ;
+CHECK (status BETWEEN 'valid' or 'expired ');
+
+USE store:
+INSERT INTO countries ( name , continent_name)
+VALUES ('saudi' , 'Asia ) ;
+
+USE store:
+INSERT INTO users ( full_name , email, gender, date_of_birth , country_code)
+VALUES ('Rahaf Alghamdi' , 'rahaf@gmail.com' , 'f' , '10/19/1998', 673910);
+
+USE store:
+INSERT INTO orders ( status)
+VALUES ('start');
+
+USE store:
+INSERT INTO products ( name , price , status )
+VALUES ('pen' , 12 , 'valid' );
+
+USE store:
+INSERT INTO order_products ( quantity )
+VALUES (9 );
+
+USE store;
+UPDATE countries
+SET name= 'Kuwait'
+WHERE continent_name= 'Asia' ;  
+
+USE store;
+DELETE FROM products WHERE 
+name= 'pen' ;
